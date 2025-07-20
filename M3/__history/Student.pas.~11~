@@ -1,0 +1,109 @@
+unit Student;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Layouts,
+  FMX.Controls.Presentation, FMX.StdCtrls, System.Rtti, FMX.Grid.Style,
+  FMX.Grid, FMX.ScrollBox, FMX.TabControl, DB;
+
+type
+  TStudentForm = class(TForm)
+    btnOtvoriKonekcijuKaBazi: TButton;
+    lytButton: TLayout;
+    tabControl: TTabControl;
+    tiStudent: TTabItem;
+    tiOcene: TTabItem;
+    sgDataStudent: TStringGrid;
+    sgImeIPrezime: TStringColumn;
+    sgBrojIndeksa: TStringColumn;
+    sgMestoRodjenja: TStringColumn;
+    sgDataOcene: TStringGrid;
+    sgPredmet: TStringColumn;
+    sgOcena: TStringColumn;
+    sgESPB: TStringColumn;
+    procedure btnOtvoriKonekcijuKaBaziClick(Sender: TObject);
+    procedure tiStudentClick(Sender: TObject);
+    procedure tiOceneClick(Sender: TObject);
+  private
+    procedure IscrtajStudenta;
+    procedure OtvoriStudenta;
+    procedure IscrtajOcene;
+    procedure OtvoriOcene;
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  StudentForm: TStudentForm;
+
+implementation
+
+{$R *.fmx}
+
+procedure TStudentForm.btnOtvoriKonekcijuKaBaziClick(Sender: TObject);
+begin
+    var LPath :string := ExtractFilePath(ParamStr(0)) + 'Database\' + 'studenti.db';
+    DataModule2.Conn.Params.Database := LPath;
+    DataModule2.Conn.Connected := true;
+end;
+
+procedure TStudentForm.tiStudentClick(Sender: TObject);
+begin
+    OtvoriStudenta;
+    IscrtajStudenta;
+    ShowMessage('Student je dobro ucitan iz baze');
+end;
+
+procedure TStudentForm.OtvoriStudenta;
+begin
+    if not DataModule2.fdqStudent.Active then
+      DataModule2.fdqStudent.Open;
+end;
+
+procedure TStudentForm.IscrtajStudenta;
+begin
+  DataModule2.fdqStudent.First;
+
+  while not DataModule1.fdqStudent.Eof do
+  begin
+    var LRow :integer := DataModule1.fdqStudent.RecNo-1;
+    sgDataStudent.Cells[0,LRow] := DataModule1.fdqStudent.FieldByName('ImeIPrezime').AsString;
+    sgDataStudent.Cells[1,LRow] := DataModule1.fdqStudent.FieldByName('BrojIndeksa').AsString;
+    sgDataStudent.Cells[2,LRow] := DataModule1.fdqStudent.FieldByName('MestoRodjenja').AsString;
+
+    DataModule1.fdqStudent.Next;
+  end;
+end;
+
+procedure TStudentForm.tiOceneClick(Sender: TObject);
+begin
+    OtvoriOcene;
+    IscrtajOcene;
+    ShowMessage('Ocene su dobro ucitane iz baze');
+end;
+
+procedure TStudentForm.OtvoriOcene;
+begin
+    if not DataModule1.fdqOcene.Active then
+      DataModule1.fdqOcene.Open;
+end;
+
+procedure TStudentForm.IscrtajOcene;
+begin
+  DataModule1.fdqOcene.First;
+
+  while not DataModule1.fdqOcene.Eof do
+  begin
+    var LRow :integer := DataModule1.fdqOcene.RecNo-1;
+    sgDataOcene.Cells[0,LRow] := DataModule1.fdqOcene.FieldByName('Predmet').AsString;
+    sgDataOcene.Cells[1,LRow] := DataModule1.fdqOcene.FieldByName('Ocena').AsString;
+    sgDataOcene.Cells[2,LRow] := DataModule1.fdqOcene.FieldByName('ESPB').AsString;
+
+    DataModule1.fdqOcene.Next;
+  end;
+end;
+
+end.

@@ -1,0 +1,128 @@
+object StudentForm: TStudentForm
+  Left = 0
+  Top = 0
+  Caption = 'Form2'
+  ClientHeight = 564
+  ClientWidth = 528
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object lytButton: TLayout
+    Position.X = -8.000000000000000000
+    Size.Width = 553.000000000000000000
+    Size.Height = 73.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object btnOtvoriKonekcijuKaBazi: TButton
+      Align = Center
+      Size.Width = 185.000000000000000000
+      Size.Height = 41.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'Otvori konekciju ka bazi'
+      TextSettings.Trimming = None
+      OnClick = btnOtvoriKonekcijuKaBaziClick
+    end
+  end
+  object tabControl: TTabControl
+    Position.Y = 65.000000000000000000
+    Size.Width = 528.000000000000000000
+    Size.Height = 564.000000000000000000
+    Size.PlatformDefault = False
+    TabIndex = 0
+    TabOrder = 1
+    TabPosition = PlatformDefault
+    Sizes = (
+      528s
+      538s
+      528s
+      538s)
+    object tiStudent: TTabItem
+      CustomIcon = <
+        item
+        end>
+      TextSettings.Trimming = None
+      IsSelected = True
+      Size.Width = 62.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Student'
+      OnClick = tiStudentClick
+      ExplicitSize.cx = 62.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object sgDataStudent: TStringGrid
+        Align = Client
+        CanFocus = True
+        ClipChildren = True
+        Margins.Top = 5.000000000000000000
+        Size.Width = 528.000000000000000000
+        Size.Height = 533.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Viewport.Width = 508.000000000000000000
+        Viewport.Height = 508.000000000000000000
+        object sgImeIPrezime: TStringColumn
+          Header = 'Ime i prezime'
+          HeaderSettings.TextSettings.WordWrap = False
+          Size.Width = 137.000000000000000000
+        end
+        object sgBrojIndeksa: TStringColumn
+          Header = 'Broj indeksa'
+          HeaderSettings.TextSettings.WordWrap = False
+          Size.Width = 135.000000000000000000
+        end
+        object sgMestoRodjenja: TStringColumn
+          Header = 'Mesto rodjenja'
+          HeaderSettings.TextSettings.WordWrap = False
+          Size.Width = 135.000000000000000000
+        end
+      end
+    end
+    object tiOcene: TTabItem
+      CustomIcon = <
+        item
+        end>
+      TextSettings.Trimming = None
+      IsSelected = False
+      Size.Width = 54.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Ocene'
+      OnClick = tiOceneClick
+      ExplicitSize.cx = 54.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object sgDataOcene: TStringGrid
+        Align = Client
+        CanFocus = True
+        ClipChildren = True
+        Margins.Top = 5.000000000000000000
+        Size.Width = 528.000000000000000000
+        Size.Height = 533.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Viewport.Width = 508.000000000000000000
+        Viewport.Height = 508.000000000000000000
+        object sgPredmet: TStringColumn
+          Header = 'Predmet'
+          HeaderSettings.TextSettings.WordWrap = False
+          Size.Width = 137.000000000000000000
+        end
+        object sgOcena: TStringColumn
+          Header = 'Ocena'
+          HeaderSettings.TextSettings.WordWrap = False
+          Size.Width = 135.000000000000000000
+        end
+        object sgESPB: TStringColumn
+          Header = 'ESPB'
+          HeaderSettings.TextSettings.WordWrap = False
+          Size.Width = 135.000000000000000000
+        end
+      end
+    end
+  end
+end
