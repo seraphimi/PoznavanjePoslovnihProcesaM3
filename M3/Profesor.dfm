@@ -24,4 +24,16 @@ object ProfesorForm: TProfesorForm
     Font.Style = [fsBold]
     ParentFont = False
   end
+  object TabControl1: TTabControl
+    Left = 8
+    Top = 8
+    Width = 694
+    Height = 418
+    TabOrder = 0
+    Tabs.Strings = (
+      'Predmeti'
+      'Studenti'
+      'Ispiti')
+    TabIndex = 0
+  end
 end

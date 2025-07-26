@@ -1,25 +1,26 @@
 object DataModule2: TDataModule2
-  Height = 441
-  Width = 703
-  PixelsPerInch = 120
+  Height = 353
+  Width = 562
   object Conn: TFDConnection
     Params.Strings = (
-      'Database=C:\Users\Mina Pavlovic\Desktop\M3-LOGIN\korisnici.db'
+      
+        'Database=C:\Users\Niggert\Documents\PoznavanjePoslovnihProcesaM3' +
+        '\M3\eindeks'
       'DriverID=SQLite')
     LoginPrompt = False
-    Left = 120
-    Top = 96
+    Left = 96
+    Top = 77
   end
   object KorisnikDataSource: TDataSource
     DataSet = Korisnik
-    Left = 440
-    Top = 96
+    Left = 352
+    Top = 77
   end
   object Korisnik: TFDTable
     Connection = Conn
-    TableName = 'korisnik'
-    Left = 440
-    Top = 276
+    TableName = 'korisnici'
+    Left = 352
+    Top = 221
   end
   object fdqStudent: TFDQuery
     Connection = Conn
@@ -27,8 +28,8 @@ object DataModule2: TDataModule2
       'select *'
       'from Student'
       '')
-    Left = 240
-    Top = 256
+    Left = 192
+    Top = 205
   end
   object fdqOcene: TFDQuery
     Connection = Conn
@@ -36,7 +37,7 @@ object DataModule2: TDataModule2
       'select *'
       'from Ocene'
       '')
-    Left = 336
-    Top = 200
+    Left = 269
+    Top = 160
   end
 end

@@ -120,6 +120,22 @@
             <Form>AdministratorForm</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="uNotificationForm.pas">
+            <Form>frmNotification</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uProfessorMain.pas">
+            <Form>frmProfessorMain</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uStatistike.pas">
+            <Form>frmStatistike</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uStudentList.pas">
+            <Form>frmStudentList</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

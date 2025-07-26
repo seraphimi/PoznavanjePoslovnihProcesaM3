@@ -29,11 +29,13 @@ implementation
 
 {$R *.dfm}
 
-uses DB, Student, Profesor, Administrator;
+uses DB, Student, Profesor, Administrator, uProfessorMain;
 
 procedure TLoginForm.Button1Click(Sender: TObject);
 var
   found: Boolean;
+  profesorID: Integer;
+  profesorIme, profesorPrezime: string;
 begin
   found := False;
 
@@ -43,17 +45,46 @@ begin
   while (not DataModule2.Korisnik.Eof) and (not found) do
   begin
     if (DataModule2.Korisnik.FieldByName('korisnicko_ime').AsString = korisnickoIme.Text) and
-       (DataModule2.Korisnik.FieldByName('sifra').AsString = sifra.Text) and
-       (DataModule2.Korisnik.FieldByName('tip').AsString = TipKorisnika.Text) then
+       (DataModule2.Korisnik.FieldByName('lozinka').AsString = sifra.Text) and
+       (DataModule2.Korisnik.FieldByName('tip_korisnika').AsString = TipKorisnika.Text) then
     begin
       found := True;
 
       if TipKorisnika.Text = 'student' then
-        StudentForm.Show
+      begin
+        // StudentForm.Show; // Dodaćete kada implementirate student form
+      end
       else if TipKorisnika.Text = 'profesor' then
-        ProfesorForm.Show
+      begin
+        try
+          // Dobijte podatke profesora
+          profesorID := DataModule2.Korisnik.FieldByName('profesor_id').AsInteger;
+
+          // Možda trebate da otvorite tabelu profesora da dobijete ime i prezime
+          // DataModule2.Profesor.Open;
+          // DataModule2.Profesor.Locate('id', profesorID, []);
+          // profesorIme := DataModule2.Profesor.FieldByName('ime').AsString;
+          // profesorPrezime := DataModule2.Profesor.FieldByName('prezime').AsString;
+
+          // Za sada, jednostavno kreirajte form
+          if not Assigned(frmProfessorMain) then
+            Application.CreateForm(TfrmProfessorMain, frmProfessorMain);
+
+          // Postavite podatke profesora
+          frmProfessorMain.ProfesorID := profesorID;
+          // frmProfessorMain.ProfesorIme := profesorIme;
+          // frmProfessorMain.ProfesorPrezime := profesorPrezime;
+
+          frmProfessorMain.Show;
+        except
+          on E: Exception do
+            ShowMessage('Greška pri otvaranju professor form-a: ' + E.Message);
+        end;
+      end
       else if TipKorisnika.Text = 'administrator' then
+      begin
         AdministratorForm.Show;
+      end;
 
       LoginForm.Hide;
     end
@@ -65,5 +96,4 @@ begin
     ShowMessage('Pogrešno korisničko ime / lozinka!');
 end;
 
-
-end.
+end. // <- Ovo je nedostajalo!
