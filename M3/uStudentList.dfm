@@ -276,4 +276,31 @@ object frmStudentList: TfrmStudentList
     Left = 48
     Top = 120
   end
+  object FDUpdateSQL1: TFDUpdateSQL
+    Connection = FDConnection1
+    InsertSQL.Strings = (
+      'INSERT INTO REZULTATI_PREDISPITNIH'
+      '(BODOVI, NAPOMENE)'
+      'VALUES (:NEW_bodovi, :NEW_napomene);'
+      'SELECT LAST_INSERT_AUTOGEN() AS ID')
+    ModifySQL.Strings = (
+      'UPDATE REZULTATI_PREDISPITNIH'
+      'SET BODOVI = :NEW_bodovi, NAPOMENE = :NEW_napomene'
+      'WHERE ID = :OLD_id;'
+      'SELECT ID'
+      'FROM REZULTATI_PREDISPITNIH'
+      'WHERE ID = :NEW_id')
+    DeleteSQL.Strings = (
+      'DELETE FROM REZULTATI_PREDISPITNIH'
+      'WHERE ID = :OLD_id')
+    FetchRowSQL.Strings = (
+      
+        'SELECT ID, PREDISPITNA_OBAVEZA_ID, STUDENT_ID, BODOVI, DATUM_REA' +
+        'LIZACIJE, '
+      '  NAPOMENE'
+      'FROM REZULTATI_PREDISPITNIH'
+      'WHERE ID = :OLD_id')
+    Left = 440
+    Top = 256
+  end
 end

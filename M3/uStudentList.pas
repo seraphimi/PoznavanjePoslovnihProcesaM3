@@ -15,6 +15,7 @@ uses
 type
   TfrmStudentList = class(TForm)
     FDConnection1: TFDConnection;
+    FDUpdateSQL1: TFDUpdateSQL;
   published
     pnlTop: TPanel;
     pnlCenter: TPanel;
@@ -131,6 +132,14 @@ begin
   qryPredispitneStudent.Connection := FConnection;
   dsPredispitneStudent.DataSet := qryPredispitneStudent;
   dbgPredispitneStudent.DataSource := dsPredispitneStudent;
+
+      FDUpdateSQL1 := TFDUpdateSQL.Create(Self);
+  qryPredispitneStudent.UpdateObject := FDUpdateSQL1;
+  qryPredispitneStudent.CachedUpdates := False;
+
+
+  // Postavi SQL za ažuriranje bodova i napomena
+
 end;
 
 procedure TfrmStudentList.LoadStudenti;
@@ -276,20 +285,38 @@ begin
   qryPredispitneStudent.Open;
 
     // Set column widths for dbgPredispitneStudent
-  if dbgPredispitneStudent.Columns.Count > 0 then
+ dbgPredispitneStudent.ReadOnly := False;
+if dbgPredispitneStudent.Columns.Count > 0 then
   begin
-    dbgPredispitneStudent.Columns[0].Width := 0;     // id (hidden)
-    dbgPredispitneStudent.Columns[1].Width := 140;   // obaveza
-    dbgPredispitneStudent.Columns[2].Width := 90;    // tip
-    dbgPredispitneStudent.Columns[3].Width := 65;    // maksimalni_bodovi
-    dbgPredispitneStudent.Columns[4].Width := 60;    // bodovi
-    dbgPredispitneStudent.Columns[5].Width := 85;    // datum_realizacije
-    dbgPredispitneStudent.Columns[6].Width := 120;   // napomene
-    dbgPredispitneStudent.Columns[7].Width := 65;    // ostvareni_bodovi
-    dbgPredispitneStudent.Columns[8].Width := 65;    // maksimalni_predispitni_bodovi
-  end;
+  dbgPredispitneStudent.Columns[0].Width := 0;     // id (hidden)
+  dbgPredispitneStudent.Columns[0].ReadOnly := True;
+
+  dbgPredispitneStudent.Columns[1].Width := 140;   // obaveza
+  dbgPredispitneStudent.Columns[1].ReadOnly := False;
+
+  dbgPredispitneStudent.Columns[2].Width := 90;    // tip
+  dbgPredispitneStudent.Columns[2].ReadOnly := True;
+
+  dbgPredispitneStudent.Columns[3].Width := 65;    // maksimalni_bodovi
+  dbgPredispitneStudent.Columns[3].ReadOnly := True;
+
+  dbgPredispitneStudent.Columns[4].Width := 60;    // bodovi
+  dbgPredispitneStudent.Columns[4].ReadOnly := False;
+
+  dbgPredispitneStudent.Columns[5].Width := 85;    // datum_realizacije
+  dbgPredispitneStudent.Columns[5].ReadOnly := True;
+
+  dbgPredispitneStudent.Columns[6].Width := 120;   // napomene
+  dbgPredispitneStudent.Columns[6].ReadOnly := False;
+
+  dbgPredispitneStudent.Columns[7].Width := 65;    // ostvareni_bodovi
+  dbgPredispitneStudent.Columns[7].ReadOnly := False;
+
+  dbgPredispitneStudent.Columns[8].Width := 65;    // maksimalni_predispitni_bodovi
+  dbgPredispitneStudent.Columns[8].ReadOnly := False;
 end;
 
+end;
 function TfrmStudentList.GetSelectedStudentID: Integer;
 begin
   Result := 0;
